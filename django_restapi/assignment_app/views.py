@@ -25,3 +25,11 @@ def Hotels_list(request):
             serialize_request_data.save()
 
         return Response({"Message": "Added Successfully"})
+
+
+@api_view(['GET', 'POST'])
+def Hotels_detail(request,pk):
+    if request.method == 'GET':
+        hotels_list = Hotels.objects.get(id=pk)
+        hotelSerializer = HotelSerializers(hotels_list, many=False)
+        return Response(hotelSerializer.data)
