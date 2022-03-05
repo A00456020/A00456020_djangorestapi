@@ -7,8 +7,8 @@ I am Parth Tarak Vaidya, A00456020, MCDA Fall 2021 cohort, Saint Mary's Universi
 The database used is MySQL database created using the following sql commands:
 
 create database djangorestapi_db;
-create user djangodbadmin identified by "access";
-grant all on djangorestapi_db.* to 'djangodbadmin'@'%';
+create user 'djangodbadmin'@'%' identified by "access";
+grant all privileges on djangorestapi_db.* to 'djangodbadmin'@'%';
 
 To get the list of all the hotels, use:
 
@@ -23,6 +23,7 @@ GET Request to http://127..00.1:8000/hotels_list/7 with empty body
 to add new Hotel to database, use
 
 POST Request to http://localhost:8080/hotels_list/ with Form data body containing:
+(This will only work if the request body has follpwing key:value pairs in FORM DATA mode.)
 
 id:5
 name:AhmedabadGrand
