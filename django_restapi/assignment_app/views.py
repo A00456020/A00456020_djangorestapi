@@ -22,7 +22,7 @@ def Hotels_list(request):
         hotel_request = request.data
         serialize_request_data = HotelSerializers(data=hotel_request)
         if serialize_request_data.is_valid():
-            serialize_request_data.save()
+            serialize_request_data()
 
         return Response({"Message": "Added Successfully"})
 
@@ -33,3 +33,11 @@ def Hotels_detail(request,pk):
         hotels_list = Hotels.objects.get(id=pk)
         hotelSerializer = HotelSerializers(hotels_list, many=False)
         return Response(hotelSerializer.data)
+
+
+@api_view(['GET', 'POST'])
+def Delete_Hotel(request, pk):
+    if request.method == 'POST':
+        hotels_list = Hotels.objects.filter(id=pk).delete()
+        hotelSerializer = HotelSerializers(hotels_list, many=False)
+        return Response({"Message": "Deleted Successfully!"})
